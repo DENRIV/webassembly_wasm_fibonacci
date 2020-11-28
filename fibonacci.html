@@ -1,0 +1,39 @@
+<!DOCTYPE html> 
+<html>
+   <head> 
+      <meta charset="UTF-8">
+   </head>
+   <body>
+   
+   	  <p> fibonacci Series </p>
+	  <p id="p1"> ... </p>  
+	  <p id="p2"> ... </p>  
+	  
+      <script> 
+		 var s = "___"     
+         
+		 const importObj = { 
+            env: { _Z10displaylogi: n => console.log(n) } 
+         };
+         fetch("fibonacci.wasm") 
+            .then(bytes => bytes.arrayBuffer()) 
+            .then(module => WebAssembly.instantiate(module, importObj)) 
+            .then(finalcode => { 
+			console.log("fibonacci finalcode"); 
+            console.log(finalcode); 
+			console.log("fibonacci call function"); 
+			
+            //console.log(finalcode.instance.exports._Z15fibonacciSeriesi(10)); 
+			var result = finalcode.instance.exports._Z15fibonacciSeriesi(10) 
+			console.log(result); 
+			document.getElementById("p1").innerHTML = result;
+			
+			console.log("fibonacci end"); 
+			
+         });
+
+		 document.getElementById("p2").innerHTML = s;
+      </script> 
+	  
+   </body>
+</html>
